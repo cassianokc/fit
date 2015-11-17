@@ -21,7 +21,6 @@ minErr = realmax;
 minElem = zeros(1, dimSize);
 err = zeros(1, popSize);
 mutationFactor=0.3;
-lambda=0.7;
 recProb=0.8;
 
 
@@ -32,12 +31,14 @@ for i=1:popSize
 		err(1,i) = mean(calcErr.^2);
 end
 
-[minErr, minIdx] = min(err(1,:))
-minElem = elems(minIdx,:)
+[minErr, minIdx] = min(err(1,:));
+minElem = elems(minIdx,:);
+it = 0;
 
 
 
-for it = 1:100000;
+
+while it<100
 	for i=1:popSize
 		%randomize the parents
 		parentIdx = round(rand(1, 3)*(popSize-1))+1;
@@ -60,7 +61,11 @@ for it = 1:100000;
 			elems(i,:) = v;
 		end
 	end
-	[minErr, minIdx] = min(err(1,:))
-	minElem = elems(minIdx,:)
+	lastMinElem = minElem;
+	[minErr, minIdx] = min(err(1,:));
+	minElem = elems(minIdx,:);
+	if max(max(lastMinIdx-minIdx)) < 0.0001
+		it = it+1;
+	end
 end
 

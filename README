@@ -3,6 +3,9 @@ Evolution(DE) to select parameters of a predefined function F that
 minimize the MSE(Mean Square Error) between the F and
 experimental/known/given points.
 	The tool was tested on GNU Octave, but it should work fine on MATLAB.
+	Keep in mind that the algorithm is randomic and don't always converge
+to the global minimum, run it as much times as possible/viable/ before
+using the choosen parameters.
 
 ==========================================================================
 
