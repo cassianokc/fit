@@ -1,4 +1,19 @@
 function [minElem, minErr] = fit(x, y, lowerBound, upperBound, fixedParams, func)
+%Finds the parameters of a function that minimizes the MSE of the obtained func results for a vector x with the expected/measured values y by using diferential evolution.
+%	x: inputs of f where the MSE are being calculated
+%	y: expected/measured outputs of the functions
+%	lowerBound: vector containing the lowest possible values for all the
+%parameters in the same order as they are used on func
+%	upperBound: vector containing the highest possible values for all the
+%parameters in the same order as they are used on func
+%	fixedParams: these variable is always passed to func as a parameter without any changes, this allows more flexibility for defining the function
+% function: A function handler/reference that is going to be called for
+%computing the its values on input vector x with different parameters. The
+%function must receive 3 parameters, the input vector x, the constant values
+%fixedParams and a vector containing the parameters that are going to be fit
+% return minElem: the parameters that gave the provide the minimum MSE
+% return minErr: the minimum MSE found
+
 popSize = 100;
 dimSize = length(lowerBound);
 

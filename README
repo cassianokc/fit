@@ -1,0 +1,24 @@
+	This repo contains a tool for fitting functions by using Diferential
+Evolution(DE) to select parameters of a predefined function F that
+minimize the MSE(Mean Square Error) between the F and
+experimental/known/given points.
+	The tool was tested on GNU Octave, but it should work fine on MATLAB.
+
+==========================================================================
+
+	Example: First you need to define the function to be fitted, here is an
+simple example(concentration of a reagent in a reactor over time):
+
+		function c = concentration(t, fixedParams, params) c0 = fixedParams(1);
+		res = params(1); k = params(2); c = res+(c0-res).*exp(-k.*t); end
+
+	This function receives a column vector t and returns a c row vector.  The
+params input is 'parsed' and its values are used to compute c.  The
+fixedParams input is also 'parsed', but the DE is not going to change them
+in order to get better MSE results.
+	Now we call the fit function:
+		[params, err] = fit(t, measuredC, [0 0], [500, 1], [measuredC(1)] ...
+				@concentration);
+	The inputs [0 0] and [500 1] are the lowest and highest acceptable values
+for the fitted/tunned parameters, respectivelly.
+
